@@ -64,68 +64,69 @@
     
 
     <section class="how-it-works">
-      <h2>🚀 Deploy the Best Context with One Line of Code</h2>
+      <h2>🚀 Find the Context That Actually Improves Output</h2>
       <p class="section-intro" style="text-align: center; margin-bottom: 30px; font-size: 1.2em;">
-        <strong>ContextPilot runs the tests, ranks the results, and gives you clean, deployable output — no rewrites, no guesswork.</strong>
+        <strong>ContextPilot shows you what data is available, lets you test new variables, and finds the best-performing combination — with full transparency.</strong>
       </p>
-
+    
       <div class="grid-3">
         <div class="card">
-          <h3>🔗 1. Connect Your Context Sources</h3>
-          <p>Upload your JSON or connect live sources. We’ll extract memory blocks, metadata, and past interactions for testing.</p>
+          <h3>🔗 1. Connect Your Data</h3>
+          <p>Upload a JSON file or connect live sources. We surface all available fields — from metadata to past interactions — even ones you may not have thought to use.</p>
         </div>
-
+    
         <div class="card">
           <h3>🧠 2. Define Your Prompt</h3>
-          <p>Use your real production prompt — just add variables like <code>{{user_query}}</code> and <code>{{context_block}}</code>. Nothing else changes.</p>
+          <p>Use your real prompt with dynamic slots like <code>{{user_query}}</code> and <code>{{context}}</code>. No rewrites. You can manually inject variables to test or let us handle it.</p>
         </div>
-
+    
         <div class="card">
-          <h3>🔬 3. Auto-Generate Variants</h3>
-          <p>ContextPilot builds multiple context strategies automatically and runs them through your selected model (OpenAI, Claude, etc.) with your real queries.</p>
+          <h3>🔬 3. Run Context Experiments</h3>
+          <p>We auto-generate multiple strategies using different combinations of inputs. You can include or exclude any variable to see how it affects output.</p>
         </div>
-
+    
         <div class="card">
-          <h3>📊 4. Compare and Choose</h3>
-          <p>Each version is scored on output quality, latency, and cost. You get a side-by-side breakdown with a clear winner.</p>
+          <h3>📊 4. Compare Variations</h3>
+          <p>See side-by-side results with real outputs. Compare quality, tone, token usage, latency — and discover what actually moves the needle.</p>
         </div>
-
+    
         <div class="card">
-          <h3>🚀 5. Deploy via SDK or Export</h3>
-          <p>Choose your path: dynamic fetching or static config.</p>
-
+          <h3>🚀 5. Deploy with One Line</h3>
+          <p>Deploy the winning setup via SDK (dynamic) or export as a config (static). Either way, your app now uses the most efficient and effective context.</p>
+    
           <details class="code-toggle">
             <summary>Show example code</summary>
             <div class="code-block">
               <h4>▶️ Option A: Live Fetch with SDK</h4>
               <pre><code>
-const context = await contextPilot.getContext({
-  promptName: "support_reply",
-  userId: "abc123"
-});
-
-const result = await llm.call({
-  prompt: promptTemplate,
-  context
-});
+    const context = await contextPilot.getContext({
+      promptName: "support_reply",
+      userId: "abc123"
+    });
+    
+    const result = await llm.call({
+      prompt: promptTemplate,
+      context
+    });
               </code></pre>
-
+    
               <h4>📦 Option B: Export Static Strategy</h4>
               <pre><code>
-{
-  "promptName": "support_reply",
-  "contextBlocks": [
-    "metadata.user_plan",
-    "memory.last_3_messages",
-    "summary.latest_issue"
-  ]
-}
+    {
+      "promptName": "support_reply",
+      "contextBlocks": [
+        "metadata.user_plan",
+        "memory.last_3_messages",
+        "summary.latest_issue"
+      ]
+    }
               </code></pre>
             </div>
           </details>
         </div>
       </div>
     </section>
+    
 
     <section class="use-cases">
       <h2>🎯 The Right Context for the Right Experience</h2>
@@ -161,9 +162,20 @@ const result = await llm.call({
     </section>
 
     <section class="compatibility">
-      <h2>🔌 Plug Into Your Existing Stack</h2>
-      <p>ContextPilot works out of the box with OpenAI, Anthropic, and Cohere. It also integrates cleanly with memory and orchestration tools like LangChain, LlamaIndex, and mem0. Use our REST API or export clean configs — no lock-in, no rewrites.</p>
+      <h2>🔌 Works Seamlessly With Your LLM Stack</h2>
+      <p>
+        Bring your own API keys — ContextPilot runs tests using your existing access to OpenAI, Anthropic, Cohere, and more. 
+      </p>
+      <p>
+        Integrates directly with your orchestration tools like <strong>LangChain</strong>, <strong>LlamaIndex</strong>, and <strong>mem0</strong>, 
+        so you can keep your memory systems and prompt versioning exactly as they are.
+      </p>
+      <p>
+        Use our lightweight SDK to fetch optimized context at runtime, or export static configs to drop directly into your app logic. 
+        No lock-in. No rewrites. Just better prompts.
+      </p>
     </section>
+    
 
     <section class="team-note">
       <h2>🧪 Built by LLM Engineers — for LLM Teams</h2>
