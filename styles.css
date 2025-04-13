@@ -1,0 +1,185 @@
+/* ================================
+  Base Layout + Typography
+================================= */
+body {
+    margin: 0;
+    padding: 40px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #0e1117;
+    color: #f1f5f9;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    font-size: 2.75rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    color: #38bdf8;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    color: #facc15;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    margin-bottom: 1rem;
+    color: #cbd5e1;
+  }
+  
+  
+  /* ================================
+    Hero Section
+  ================================= */
+  .hero {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .tagline {
+    font-size: 1.25rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  
+  /* ================================
+    Grids
+  ================================= */
+  .grid-3, .grid-4 {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  
+  .grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  
+  /* ================================
+    Cards
+  ================================= */
+  .card {
+    background-color: #1e293b;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card ul {
+    padding-left: 1.25rem;
+    margin: 0;
+  }
+  
+  .card li {
+    margin-bottom: 0.5rem;
+  }
+  
+  
+  /* ================================
+    Before / After Comparison
+  ================================= */
+  .before-after {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .before-after .card {
+    flex: 1 1 45%;
+    min-width: 300px;
+  }
+  
+  .before-after .highlight {
+    border: 1px solid #22c55e;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.25);
+  }
+  
+  
+  /* ================================
+    CTA Section
+  ================================= */
+  .cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  
+  .cta input {
+    padding: 12px;
+    font-size: 1rem;
+    width: 260px;
+    max-width: 100%;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 0.75rem;
+  }
+  
+  .cta button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .cta button:hover {
+    background-color: #16a34a;
+  }
+  
+  
+  /* ================================
+    Responsive
+  ================================= */
+  @media (max-width: 768px) {
+    .before-after {
+      flex-direction: column;
+    }
+  
+    .before-after .card {
+      flex: 1 1 100%;
+    }
+  
+    .grid-3,
+    .grid-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    .cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .cta input,
+    .cta button {
+      width: 100%;
+    }
+  }
+  
