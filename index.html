@@ -1,194 +1,948 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ContextPilot</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContextPilot | Cut LLM Costs, Boost Quality</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --primary-light: #EEF2FF;
+            --secondary: #10B981;
+            --secondary-dark: #059669;
+            --text-dark: #1F2937;
+            --text-light: #4B5563;
+            --text-lighter: #9CA3AF;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --bg-dark: #111827;
+            --border-light: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 6px;
+            --radius-lg: 12px;
+            --color-bad: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            max-width: 36rem;
+        }
+
+        .lead {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 32rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            background: var(--bg-white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 7rem 0 6rem;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-graphic {
+            margin-top: 4rem;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--primary-dark);
+            color: white;
+            padding: 1.5rem 0;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            text-align: center;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Problem */
+        .problem {
+            padding: 6rem 0;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid #EF4444;
+        }
+
+        .problem-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #EF4444;
+        }
+
+        /* Solution */
+        .solution {
+            padding: 6rem 0;
+            background: var(--bg-light);
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .solution-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 0;
+        }
+
+        .steps {
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 2.25rem;
+            height: 100%;
+            width: 2px;
+            background-color: var(--border-light);
+            transform: translateX(-50%);
+        }
+
+        .step {
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3rem;
+            height: 3rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            z-index: 1;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Results */
+        .results {
+            padding: 6rem 0;
+            background: var(--bg-light);
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .comparison-card {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .comparison-card h3 {
+            text-align: center;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+        }
+
+        .comparison-list li::before {
+            content: "✓";
+            margin-right: 0.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .comparison-list-negative li::before {
+            content: "X";
+            color: var(--color-bad);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-box h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .signup-form input {
+            flex: 1;
+            padding: 0.875rem 1.25rem;
+            border-radius: var(--radius);
+            border: none;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+        }
+
+        .footer-tagline {
+            color: var(--text-lighter);
+            margin-bottom: 0;
+            max-width: 400px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-lighter);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.75rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .stats-container {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .signup-form {
+                flex-direction: column;
+            }
+
+            .problem, .solution, .how-it-works, .results, .cta {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Token visual styles */
+        .token-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .token {
+            padding: 0.875rem 1rem;
+            font-size: 0.9rem;
+            border-radius: var(--radius);
+            background: white;
+            color: var(--text-light);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .token.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            font-weight: 500;
+        }
+
+        .token.removed {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .token.added {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .metrics {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .metric:last-child {
+            margin-bottom: 0;
+        }
+
+        .metric-label {
+            color: var(--text-light);
+        }
+
+        .metric-value {
+            font-weight: 600;
+        }
+
+        .metric-value.bad {
+            color: #EF4444;
+        }
+
+        .metric-value.good {
+            color: var(--secondary);
+        }
+
+        .infographic {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .infographic-block {
+            flex: 1;
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .infographic-block h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        @media (max-width: 992px) {
+            .infographic {
+                flex-direction: column;
+            }
+        }
+
+        .comparison-card.negative {
+            border-top: 4px solid #FCA5A5;
+            background-color: var(--bg-white);
+        }
+        
+        .comparison-card.positive {
+            border-top: 4px solid var(--secondary);
+            background-color: var(--bg-white);
+        }
+        
+        .comparison-list-negative li::before {
+            content: "×";
+            color: var(--color-bad);
+            font-size: 1.25rem;
+            font-weight: normal;
+            line-height: 0.75;
+        }
+        
+        .tagline {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Add these CSS rules to the style section */
+        .team-banner {
+            background: linear-gradient(to right, var(--bg-white), var(--primary-light), var(--bg-white));
+            padding: 3rem 0;
+            margin-bottom: -2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(79, 70, 229, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .team-text {
+            text-align: center;
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-text strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Add CSS for the credibility banner */
+        .credibility-bar {
+            background-color: var(--bg-white);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .credibility-text {
+            text-align: center;
+            margin: 3rem 0 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .credibility-text strong {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header class="hero">
-      <h1>🧠 ContextPilot</h1>
-      <p class="tagline">The prompt optimization platform that cuts costs and improves outputs for AI product teams.</p>
-      <div class="cta">
-        <input type="email" placeholder="Your email" />
-        <button>Join Early Access</button>
-      </div>
+    <header>
+        <div class="container flex justify-between items-center">
+            <div class="logo">ContextPilot</div>
+            <a href="https://tally.so/r/3EA7l4" class="btn btn-primary">Join Early Access</a>
+        </div>
     </header>
 
-    <section class="problems">
-      <h2>❌ Context Should Be a Feature, Not a Hunch</h2>
-      <div class="grid-3">
-        <div class="card">
-          <h3>🤯 Flying Blind: Most Context Goes Unused</h3>
-          <p>You're injecting memory, metadata, summaries — but have no idea which elements actually improve outputs.</p>
-        </div>
-        <div class="card">
-          <h3>💸 Token Waste: Ballooning LLM Costs</h3>
-          <p>Costs add up fast when prompts are stuffed with "just in case" context.</p>
-        </div>
-        <div class="card">
-          <h3>⚖️ Invisible Tradeoffs: Quality vs. Cost vs. Speed</h3>
-          <p>No way to compare output quality, latency, and cost across strategies — until it hits production.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="solution-comparison">
-      <h2>✅ From Guessing to Optimizing</h2>
-      <div class="before-after">
-        <div class="card">
-          <h3>❌ Before ContextPilot</h3>
-          <ul>
-            <li>Hardcoded prompt logic with no way to test changes safely</li>
-            <li>Manual copy/paste into playgrounds for tuning</li>
-            <li>No clarity on token cost vs. output value</li>
-            <li>Context added "just in case," not based on data</li>
-            <li>Unknown impact on UX until users complain</li>
-          </ul>
-        </div>
-
-        <div class="card highlight">
-          <h3>✅ With ContextPilot</h3>
-          <ul>
-            <li>Modular prompt inputs treated like ML features</li>
-            <li>Tests context variations automatically — real data, real outputs</li>
-            <li>Side-by-side comparison of quality, latency, and cost</li>
-            <li>Auto-identifies most effective context slice for each use case</li>
-            <li>Deploys via SDK or config — no backend rewrites</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    
-
-    <section class="how-it-works">
-      <h2>🚀 Find the Context That Actually Improves Output</h2>
-      <p class="section-intro" style="text-align: center; margin-bottom: 30px; font-size: 1.2em;">
-        <strong>ContextPilot shows you what data is available, lets you test new variables, and finds the best-performing combination — with full transparency.</strong>
-      </p>
-    
-      <div class="grid-3">
-        <div class="card">
-          <h3>🔗 1. Connect Your Data</h3>
-          <p>Upload a JSON file or connect live sources. We surface all available fields — from metadata to past interactions — even ones you may not have thought to use.</p>
-        </div>
-    
-        <div class="card">
-          <h3>🧠 2. Define Your Prompt</h3>
-          <p>Use your real prompt with dynamic slots like <code>{{user_query}}</code> and <code>{{context}}</code>. No rewrites. You can manually inject variables to test or let us handle it.</p>
-        </div>
-    
-        <div class="card">
-          <h3>🔬 3. Run Context Experiments</h3>
-          <p>We auto-generate multiple strategies using different combinations of inputs. You can include or exclude any variable to see how it affects output.</p>
-        </div>
-    
-        <div class="card">
-          <h3>📊 4. Compare Variations</h3>
-          <p>See side-by-side results with real outputs. Compare quality, tone, token usage, latency — and discover what actually moves the needle.</p>
-        </div>
-    
-        <div class="card">
-          <h3>🚀 5. Deploy with One Line</h3>
-          <p>Deploy the winning setup via SDK (dynamic) or export as a config (static). Either way, your app now uses the most efficient and effective context.</p>
-    
-          <details class="code-toggle">
-            <summary>Show example code</summary>
-            <div class="code-block">
-              <h4>▶️ Option A: Live Fetch with SDK</h4>
-              <pre><code>
-    const context = await contextPilot.getContext({
-      promptName: "support_reply",
-      userId: "abc123"
-    });
-    
-    const result = await llm.call({
-      prompt: promptTemplate,
-      context
-    });
-              </code></pre>
-    
-              <h4>📦 Option B: Export Static Strategy</h4>
-              <pre><code>
-    {
-      "promptName": "support_reply",
-      "contextBlocks": [
-        "metadata.user_plan",
-        "memory.last_3_messages",
-        "summary.latest_issue"
-      ]
-    }
-              </code></pre>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Stop wasting money on bloated LLM prompts</h1>
+                <p class="tagline">Data-driven context optimization for AI applications</p>
+                <p class="lead">ContextPilot cuts prompt token usage while <em>improving</em> output quality and latency.</p>
+                <div class="flex" style="gap: 1rem;">
+                    <a href="https://tally.so/r/3EA7l4" class="btn btn-primary">Get Early Access</a>
+                    <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+                </div>
             </div>
-          </details>
         </div>
-      </div>
     </section>
-    
 
-    <section class="use-cases">
-      <h2>🎯 The Right Context for the Right Experience</h2>
-      <div class="grid-3">
-        <div class="card">
-          <h3>🤖 AI Assistants</h3>
-          <p>Decide what to include from memory, user metadata, and previous queries to improve usefulness without bloat, creating more responsive assistants.</p>
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-value">Save</div>
+                    <div class="stat-label">on API Costs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">Improve</div>
+                    <div class="stat-label">Response Quality</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">Speed Up</div>
+                    <div class="stat-label">Response time</div>
+                </div>
+            </div>
         </div>
-        <div class="card">
-          <h3>💬 Support Bots</h3>
-          <p>Test whether injecting past tickets or user profile data actually leads to better answers — or just increases cost and response time.</p>
+    </section>
+
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="text-center">
+                <p class="subtitle">The Problem</p>
+                <h2>You're flying blind with your prompt context</h2>
+                <p class="lead" style="margin: 0 auto;">Every token costs money, but guessing which context to include leads to bloated prompts or missing critical information.</p>
+            </div>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>Runaway Token Costs</h3>
+                    <p>Including too much context "just to be safe" dramatically increases your API costs with no guaranteed improvement in output.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🐌</div>
+                    <h3>Slow Response Times</h3>
+                    <p>Bloated prompts mean users wait longer for responses, damaging the user experience of your AI applications.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">❓</div>
+                    <h3>Context Blind Spots </h3>
+                    <p>Even with rigorous evals, it's nearly impossible to systematically evaluate which context elements actually contribute to response quality versus just inflating token costs.</p>
+                </div>
+            </div>
         </div>
-        <div class="card">
-          <h3>📚 Personalized Tools</h3>
-          <p>Figure out which inputs (e.g. history, preferences, summaries) actually impact tone, clarity, and quality for truly personalized experiences.</p>
+    </section>
+
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="text-center">
+                <p class="subtitle">The Solution</p>
+                <h2>Data-driven context optimization</h2>
+                <p class="lead" style="margin: 0 auto;">ContextPilot tests different context strategies to find the optimal balance between token usage and output quality. Data-driven context optimization for AI apps.</p>
+            </div>
+
+            <div class="infographic">
+                <div class="infographic-block">
+                    <h3>Before: Bloated Context</h3>
+                    <div class="token-grid">
+                        <span class="token active">Current Query</span>
+                        <span class="token active">Chat History</span>
+                        <span class="token active">Memory Store</span>
+                        <span class="token active">System Config</span>
+                        <span class="token active">User Profile</span>
+                        <span class="token active">Debug Logs</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <span class="metric-label">API Cost:</span>
+                            <span class="metric-value bad">Excessive</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Response Time:</span>
+                            <span class="metric-value bad">Slow</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Response Quality:</span>
+                            <span class="metric-value bad">Inconsistent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="infographic-block">
+                    <h3>After: Optimized Context</h3>
+                    <div class="token-grid">
+                        <span class="token active">Current Query</span>
+                        <span class="token active">Chat History</span>
+                        <span class="token active">Memory Store</span>
+                        <span class="token removed">System Config</span>
+                        <span class="token removed">User Profile</span>
+                        <span class="token removed">Debug Logs</span>
+                        <span class="token added">Relevancy Score</span>
+                        <span class="token added">Intent Analysis</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <span class="metric-label">API Cost:</span>
+                            <span class="metric-value good">Optimized</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Response Time:</span>
+                            <span class="metric-value good">Fast</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Response Quality:</span>
+                            <span class="metric-value good">Improved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">🧩</div>
+                    <h3>Context Slicing</h3>
+                    <p>Automatically break down your memory, summaries, and metadata into testable slices to identify what matters.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">📊</div>
+                    <h3>A/B Testing</h3>
+                    <p>Run experiments with different context combinations to find the optimal balance between quality and cost.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">📈</div>
+                    <h3>Data-Driven Results</h3>
+                    <p>Make decisions based on actual performance metrics instead of guesswork and intuition.</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section class="value-props">
-      <h2>💡 What You Get with ContextPilot</h2>
-      <div class="grid-4">
-        <div class="card"><strong>💰 Lower Costs</strong><br />Trim context size drastically without losing output quality.</div>
-        <div class="card"><strong>⚡ Faster Iteration</strong><br />Test multiple prompt variations using live data — no backend changes required.</div>
-        <div class="card"><strong>🧠 Smarter Decisions</strong><br />Compare quality, latency, and token cost side-by-side — with real examples.</div>
-        <div class="card"><strong>🤖 Better Product UX</strong><br />Build LLM features that feel intelligent and responsive, not bloated and slow.</div>
-      </div>
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="text-center">
+                <p class="subtitle">The Process</p>
+                <h2>How ContextPilot works</h2>
+                <p class="lead" style="margin: 0 auto;">A simple 4-step process to optimize your prompt context</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect your data</h3>
+                    <p>Import your conversation logs, memory blocks, and metadata directly from your existing stack. Works with LangChain, LangSmith, or custom APIs.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Design experiments</h3>
+                    <p>Our platform intelligently designs test cases to compare different context strategies, from full history to ranked memories to summaries.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Analyze results</h3>
+                    <p>See comprehensive metrics on quality, token usage, and response time side-by-side to identify the winning strategy.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Deploy and save</h3>
+                    <p>Implement the optimized context bundle in your production environment with our simple API or export functions.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="security">
-      <h2>🔒 Security and Privacy by Default</h2>
-      <p>We don’t store your prompts, responses, or API keys beyond testing. Everything runs client-authenticated and encrypted end-to-end. You stay in full control of your data — always..</p>
+    <section class="results" id="results">
+        <div class="container">
+            <div class="text-center">
+                <p class="subtitle">The Impact</p>
+                <h2>Transform your LLM economics</h2>
+                <p class="lead" style="margin: 0 auto;">ContextPilot helps companies optimize their AI context strategies for better cost-to-performance ratios</p>
+            </div>
+
+            <div class="comparison">
+                <div class="comparison-card negative">
+                    <h3>Without ContextPilot</h3>
+                    <ul class="comparison-list comparison-list-negative">
+                        <li>High API costs due to inefficient prompts</li>
+                        <li>Unnecessarily expensive LLM bills</li>
+                        <li>Slow response times hurting user experience</li>
+                        <li>Inconsistent answer quality and accuracy</li>
+                        <li>Manual guesswork on context optimization</li>
+                    </ul>
+                </div>
+                <div class="comparison-card positive">
+                    <h3>With ContextPilot</h3>
+                    <ul class="comparison-list">
+                        <li>Significant API cost reduction</li>
+                        <li>Improved response quality and relevance</li>
+                        <li>Faster responses for better user experience</li>
+                        <li>Data-driven optimization decisions</li>
+                        <li>Continuous testing and improvement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="compatibility">
-      <h2>🔌 Works Seamlessly With Your LLM Stack</h2>
-      <p>
-        Bring your own API keys — ContextPilot runs tests using your existing access to OpenAI, Anthropic, Cohere, and more. 
-      </p>
-      <p>
-        Integrates directly with your orchestration tools like <strong>LangChain</strong>, <strong>LlamaIndex</strong>, and <strong>mem0</strong>, 
-        so you can keep your memory systems and prompt versioning exactly as they are.
-      </p>
-      <p>
-        Use our lightweight SDK to fetch optimized context at runtime, or export static configs to drop directly into your app logic. 
-        No lock-in. No rewrites. Just better prompts.
-      </p>
-    </section>
-    
-
-    <section class="team-note">
-      <h2>🧪 Built by LLM Engineers — for LLM Teams</h2>
-      <p>Created by an ex-Twitter engineer and Meta PM with extensive experience building AI products. We were tired of playground spaghetti and manual testing, so we built the prompt optimization tool we needed ourselves.</p>
+    <section class="team-banner">
+        <div class="container">
+            <p class="team-text">Designed and built by <strong>ex-Meta</strong> and <strong>ex-Twitter</strong> product and engineering leaders</p>
+        </div>
     </section>
 
-    <section class="cta">
-      <h2>📬 Try It Yourself</h2>
-      <p><strong>Wondering if your prompts are bloated, brittle, or just ineffective? Join our exclusive early access program today.</strong></p>
-      <input type="email" placeholder="Your email" />
-      <button>Join Early Access</button>
-      <p class="small">Limited slots available. No credit card required.</p>
+    <section class="cta" id="early-access">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Get early access today</h2>
+                <p>Cut your LLM bills starting today and join the growing list of companies optimizing their AI context strategy.</p>
+                <a href="https://tally.so/r/3EA7l4" class="btn btn-primary" style="white-space: nowrap;">Join Early Access Waitlist</a>
+            </div>
+        </div>
     </section>
-  </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo footer-logo">ContextPilot</div>
+                <p class="footer-tagline">Optimize Your Prompts, Amplify Your Results</p>
+            </div>
+            <div class="copyright">
+                <p>© 2025 ContextPilot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
