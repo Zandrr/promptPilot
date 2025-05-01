@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>prune0 | Cut LLM Costs, Boost Quality</title>
+    <title>prune0 | ML-like Feature Testing for LLM Prompts</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -425,6 +425,12 @@
             margin: 0 auto 2rem;
         }
 
+        .cta-small {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
         .signup-form {
             display: flex;
             gap: 1rem;
@@ -696,24 +702,46 @@
             font-weight: 600;
             color: var(--text-dark);
         }
+
+        .highlight-box {
+            background-color: var(--primary-light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 3rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .highlight-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-dark);
+        }
+
+        .why-prune {
+            padding: 4rem 0;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container flex justify-between items-center">
             <div class="logo">prune0</div>
-            <a href="https://tally.so/r/3EA7l4" class="btn btn-primary">Join Early Access</a>
+            <a href="https://tally.so/r/3EA7l4" class="btn btn-primary">Start Optimizing Now</a>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Stop wasting money on bloated LLM prompts</h1>
-                <p class="tagline">Data-driven context optimization for AI applications</p>
-                <p class="lead">prune0 cuts prompt token usage while <em>improving</em> output quality and latency.</p>
+                <h1>Stop Guessing Which Context Matters. Test It.</h1>
+                <p class="tagline">Isolate, measure, and optimize what's wasting tokens vs. what improves results</p>
+                <p class="lead">prune0 applies data-driven feature selection to prompt engineering, cutting costs while improving quality and latency.</p>
                 <div class="flex" style="gap: 1rem;">
-                    <a href="https://tally.so/r/3EA7l4" class="btn btn-primary">Get Early Access</a>
+                    <a href="https://tally.so/r/3EA7l4" class="btn btn-primary">Start Optimizing Your Prompts</a>
                     <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
                 </div>
             </div>
@@ -724,16 +752,16 @@
         <div class="container">
             <div class="stats-container">
                 <div class="stat">
-                    <div class="stat-value">Save</div>
-                    <div class="stat-label">on API Costs</div>
+                    <div class="stat-value">Measure</div>
+                    <div class="stat-label">Context Impact</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">Improve</div>
-                    <div class="stat-label">Response Quality</div>
+                    <div class="stat-value">Reduce</div>
+                    <div class="stat-label">Token Waste</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">Speed Up</div>
-                    <div class="stat-label">Response time</div>
+                    <div class="stat-value">Optimize</div>
+                    <div class="stat-label">API Economics</div>
                 </div>
             </div>
         </div>
@@ -744,24 +772,21 @@
             <div class="text-center">
                 <p class="subtitle">The Problem</p>
                 <h2>You're flying blind with your prompt context</h2>
-                <p class="lead" style="margin: 0 auto;">Every token costs money, but guessing which context to include leads to bloated prompts or missing critical information.</p>
+                <p class="lead" style="margin: 0 auto;">Traditional ML has feature testing. Prompt engineering still relies on guesswork about what context actually matters.</p>
             </div>
 
             <div class="problem-grid">
                 <div class="problem-card">
-                    <div class="problem-icon">💸</div>
-                    <h3>Runaway Token Costs</h3>
-                    <p>Including too much context "just to be safe" dramatically increases your API costs with no guaranteed improvement in output.</p>
+                    <h3>Save Money: Cut Token Waste</h3>
+                    <p>Reduce LLM budget currently wasted on ineffective context. prune0 identifies exactly which context matters, dramatically reducing API costs while maintaining or improving quality.</p>
                 </div>
                 <div class="problem-card">
-                    <div class="problem-icon">🐌</div>
-                    <h3>Slow Response Times</h3>
-                    <p>Bloated prompts mean users wait longer for responses, damaging the user experience of your AI applications.</p>
+                    <h3>Save Time: End Manual Testing</h3>
+                    <p>Transform hacky prompt & context experimentation into minutes of automated testing. prune0 eliminates the code-deploy-test loop, freeing your engineers to focus on building, not tweaking.</p>
                 </div>
                 <div class="problem-card">
-                    <div class="problem-icon">❓</div>
-                    <h3>Context Blind Spots </h3>
-                    <p>Even with rigorous evals, it's nearly impossible to systematically evaluate which context elements actually contribute to response quality versus just inflating token costs.</p>
+                    <h3>Be Rigorous: Data-Driven Context Selection</h3>
+                    <p>Bring scientific methodology to prompt engineering. Replace intuition with evidence by measuring the actual contribution of each context element, just like feature testing in traditional ML.</p>
                 </div>
             </div>
         </div>
@@ -771,8 +796,8 @@
         <div class="container">
             <div class="text-center">
                 <p class="subtitle">The Solution</p>
-                <h2>Data-driven context optimization</h2>
-                <p class="lead" style="margin: 0 auto;">prune0 tests different context strategies to find the optimal balance between token usage and output quality. Data-driven context optimization for AI apps.</p>
+                <h2>Feature testing for prompt context</h2>
+                <p class="lead" style="margin: 0 auto;">prune0 brings the scientific approach of feature selection to prompt engineering. Isolate variables. Measure impact. Optimize tokens.</p>
             </div>
 
             <div class="infographic">
@@ -835,17 +860,17 @@
                 <div class="solution-card">
                     <div class="solution-icon">🧩</div>
                     <h3>Context Slicing</h3>
-                    <p>Automatically break down your memory, summaries, and metadata into testable slices to identify what matters.</p>
+                    <p>Automatically break down your context sources into testable slices - from chat history to vector store results to metadata - to identify what actually matters.</p>
                 </div>
                 <div class="solution-card">
                     <div class="solution-icon">📊</div>
-                    <h3>A/B Testing</h3>
-                    <p>Run experiments with different context combinations to find the optimal balance between quality and cost.</p>
+                    <h3>Systematic Context Evaluation</h3>
+                    <p>Test individual context elements in isolation to measure their actual contribution to response quality, just like you'd test features in a traditional ML model.</p>
                 </div>
                 <div class="solution-card">
                     <div class="solution-icon">📈</div>
                     <h3>Data-Driven Results</h3>
-                    <p>Make decisions based on actual performance metrics instead of guesswork and intuition.</p>
+                    <p>Replace guesswork with evidence. See exactly which context elements improve quality and which are just burning through your API budget.</p>
                 </div>
             </div>
         </div>
@@ -856,30 +881,35 @@
             <div class="text-center">
                 <p class="subtitle">The Process</p>
                 <h2>How prune0 works</h2>
-                <p class="lead" style="margin: 0 auto;">A simple 4-step process to optimize your prompt context</p>
+                <p class="lead" style="margin: 0 auto;">A systematic approach to context optimization without the hacky workflows</p>
             </div>
 
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Connect your data</h3>
-                    <p>Import your conversation logs, memory blocks, and metadata directly from your existing stack. Works with LangChain, LangSmith, or custom APIs.</p>
+                    <h3>Connect your data sources</h3>
+                    <p>Import your conversation logs, memory blocks, and metadata directly from your existing stack. Works with any context source - vector DBs, graph DBs, user profiles, chat history, or custom data.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Design experiments</h3>
-                    <p>Our platform intelligently designs test cases to compare different context strategies, from full history to ranked memories to summaries.</p>
+                    <h3>Design controlled experiments</h3>
+                    <p>Compare the same query with different context bundles - test recent interactions, semantic similarity, user metadata, and system configurations to measure which actually improve responses.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Analyze results</h3>
-                    <p>See comprehensive metrics on quality, token usage, and response time side-by-side to identify the winning strategy.</p>
+                    <h3>Analyze impact metrics</h3>
+                    <p>See comprehensive side-by-side analysis of token usage, response quality, and latency to identify which context elements provide value versus just increasing costs.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Deploy and save</h3>
-                    <p>Implement the optimized context bundle in your production environment with our simple API or export functions.</p>
+                    <h3>Deploy and monitor</h3>
+                    <p>Implement the optimized context strategy in your production environment with our simple API or export functions. Continue testing as your application evolves.</p>
                 </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>From our own experience:</h3>
+                <p>When we first started testing, we were shocked to find that certain context we thought was essential (user profile data, system configurations) was actually hurting response quality while driving up costs. Only through systematic context testing did we discover what actually mattered.</p>
             </div>
         </div>
     </section>
@@ -889,18 +919,18 @@
             <div class="text-center">
                 <p class="subtitle">The Impact</p>
                 <h2>Transform your LLM economics</h2>
-                <p class="lead" style="margin: 0 auto;">prune0 helps companies optimize their AI context strategies for better cost-to-performance ratios</p>
+                <p class="lead" style="margin: 0 auto;">Stop the guesswork. Start measuring what matters.</p>
             </div>
 
             <div class="comparison">
                 <div class="comparison-card negative">
                     <h3>Without prune0</h3>
                     <ul class="comparison-list comparison-list-negative">
-                        <li>High API costs due to inefficient prompts</li>
-                        <li>Unnecessarily expensive LLM bills</li>
-                        <li>Slow response times hurting user experience</li>
-                        <li>Inconsistent answer quality and accuracy</li>
-                        <li>Manual guesswork on context optimization</li>
+                        <li>High API costs from "just in case" context</li>
+                        <li>Constantly copy-pasting prompts to test changes</li>
+                        <li>Making educated guesses about which context matters</li>
+                        <li>No way to isolate and test individual context elements</li>
+                        <li>Frustrating deploy-test-wait-fix cycles for each change</li>
                     </ul>
                 </div>
                 <div class="comparison-card positive">
@@ -917,9 +947,17 @@
         </div>
     </section>
 
+    <div class="container">
+        <div class="text-center" style="margin: 4rem 0 2rem;">
+            <p class="subtitle">Why prune0?</p>
+            <h2>Not just another LLM monitoring tool</h2>
+            <p class="lead" style="margin: 0 auto; max-width: 700px;">Unlike general-purpose tools like LangSmith or Weights & Biases, prune0 is built specifically for context optimization with a feature-testing approach to prompt engineering.</p>
+        </div>
+    </div>
+
     <section class="team-banner">
         <div class="container">
-            <p class="team-text">Designed and built by <strong>ex-Meta</strong> and <strong>ex-Twitter</strong> product and engineering leaders</p>
+            <p class="team-text">Designed and built by <strong>ex-Meta</strong> and <strong>ex-Twitter</strong> product and engineering leaders who faced this exact problem building AI products at scale</p>
         </div>
     </section>
 
@@ -928,7 +966,7 @@
             <div class="cta-box">
                 <h2>Get early access today</h2>
                 <p>Cut your LLM bills starting today and join the growing list of companies optimizing their AI context strategy.</p>
-                <a href="https://tally.so/r/3EA7l4" class="btn btn-primary" style="white-space: nowrap;">Join Early Access Waitlist</a>
+                <a href="https://tally.so/r/3EA7l4" class="btn btn-primary" style="white-space: nowrap;">Start Optimizing Your Prompts</a>
             </div>
         </div>
     </section>
@@ -937,7 +975,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="logo footer-logo">prune0</div>
-                <p class="footer-tagline">Optimize Your Prompts, Amplify Your Results</p>
+                <p class="footer-tagline">Feature testing for your LLM prompts. Optimize context. Cut costs. Improve quality.</p>
             </div>
             <div class="copyright">
                 <p>© 2025 prune0. All rights reserved.</p>
